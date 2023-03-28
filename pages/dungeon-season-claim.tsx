@@ -75,7 +75,7 @@ function DungeonSeasonClaim() {
         setLoading('Fetching userdata');
 
         try {
-            const response = await fetch(`http://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
+            const response = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
                 method: 'GET',
             });
 
@@ -177,7 +177,7 @@ function DungeonSeasonClaim() {
             setData(null);
 
             // Get current instance_id
-            const response = await fetch(`http://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
+            const response = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
                 method: 'GET',
             });
             const data = await response.json();
@@ -185,7 +185,7 @@ function DungeonSeasonClaim() {
 
             setLoading('Claiming rewards');
 
-            const claimResp = await fetch(`http://idlemaster.djartsgames.ca/~idle/post.php?call=claimseasonreward&user_id=${userId}&hash=${hash}&instance_id=${instanceId}&season_id=7&level=all&is_bonus=0`, {
+            const claimResp = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=claimseasonreward&user_id=${userId}&hash=${hash}&instance_id=${instanceId}&season_id=7&level=all&is_bonus=0`, {
                 method: 'GET',
             });
 
