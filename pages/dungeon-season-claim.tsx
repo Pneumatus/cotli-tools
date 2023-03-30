@@ -58,7 +58,7 @@ function DungeonSeasonClaim() {
                     rewardStrings.push(`${rewardDef.amount} x ${describeType(rewardDef)}${rewardDef.amount > 0 ? 's' : ''}`);
                     break;
                 case 'season_buff':
-                    rewardStrings.push(`Season Buff: ${describeEffect(rewardDef.effect.effect_string)}`)
+                    rewardStrings.push(describeType(rewardDef));
                     break;
                 default: rewardStrings.push(JSON.stringify(rewardDef));
             }
@@ -73,6 +73,10 @@ function DungeonSeasonClaim() {
                 return `+${parts[1]}% Idols`;
             case 'increase_monster_spawn_time_mult':
                 return `+${parts[1]}% Spawn Speed`;
+            case 'dungeon_progress_mult':
+                return `+${parts[1]}% Dungeon Points`;
+            default:
+                return effectString;
         }
     }
 
@@ -81,12 +85,13 @@ function DungeonSeasonClaim() {
             case 'gems': return `Level ${rewardDef.level} ` + gemDefines[rewardDef.id] || `Unmapped Rune Id ${rewardDef.id}`;
             case 'chest': return chestDefines[rewardDef.chest_type_id] || `Unmapped Chest Id ${rewardDef.chest_type_id}`;
             case 'sunset_tickets': return 'Sunset Ticket';
-            case 'red_rubies': return 'Red Rubies';
-            case 'challenge_tokens': return 'Challenge Tokens';
-            case 'dungeon_coins': return 'Dungeon Coins';
-            case 'dungeon_vouchers': return 'Dungeon Vouchers';
-            case 'epic_recipe_tokens': return 'Epic Recipe Tokens';
+            case 'red_rubies': return 'Red Rubie';
+            case 'challenge_tokens': return 'Challenge Token';
+            case 'dungeon_coins': return 'Dungeon Coin';
+            case 'dungeon_vouchers': return 'Dungeon Voucher';
+            case 'epic_recipe_tokens': return 'Epic Recipe Token';
             case 'crafting_materials': return craftingMaterialDefines[rewardDef.crafting_material_id] || `Unmapped Crafting Material Id ${rewardDef.crafting_material_id}`;
+            case 'season_buff': return `Season Buff: ${describeEffect(rewardDef.effect.effect_string)}`;
             default: return JSON.stringify(rewardDef);
         }
     }
