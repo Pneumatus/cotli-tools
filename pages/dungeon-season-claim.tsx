@@ -124,7 +124,7 @@ function DungeonSeasonClaim() {
                     unclaimedData.by_level[i] = l;
                     for (const br of defLevel.base_rewards) {
                         let qty = unclaimedData.by_reward[describeType(br)] || 0
-                        qty += br.count || br.amount;
+                        qty += br.count || br.amount || 1;
                         unclaimedData.by_reward[describeType(br)] = qty;
                     }
                 }
@@ -134,7 +134,7 @@ function DungeonSeasonClaim() {
                     unclaimedData.by_level[i] = l;
                     for (const br of defLevel.bonus_rewards) {
                         let qty = unclaimedData.by_reward[describeType(br)] || 0
-                        qty += br.count || br.amount;
+                        qty += br.count || br.amount || 1;
                         unclaimedData.by_reward[describeType(br)] = qty;
                     }
                 }
