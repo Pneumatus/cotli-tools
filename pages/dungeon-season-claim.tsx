@@ -51,7 +51,14 @@ function DungeonSeasonClaim() {
                 case 'sunset_tickets':
                 case 'red_rubies':
                 case 'crafting_materials':
+                case 'challenge_tokens':
+                case 'dungeon_coins':
+                case 'dungeon_vouchers':
+                case 'epic_recipe_tokens':
                     rewardStrings.push(`${rewardDef.amount} x ${describeType(rewardDef)}${rewardDef.amount > 0 ? 's' : ''}`);
+                    break;
+                case 'season_buff':
+                    rewardStrings.push(`Season Buff: ${describeEffect(rewardDef.effect.effect_string)}`)
                     break;
                 default: rewardStrings.push(JSON.stringify(rewardDef));
             }
@@ -59,12 +66,26 @@ function DungeonSeasonClaim() {
         return rewardStrings.join(', ');
     };
 
+    const describeEffect = (effectString : string) => {
+        const parts = effectString.split(',');
+        switch (parts[0]) {
+            case 'bonus_idols_earned_from_reset':
+                return `+${parts[1]}% Idols`;
+            case 'increase_monster_spawn_time_mult':
+                return `+${parts[1]}% Spawn Speed`;
+        }
+    }
+
     const describeType = (rewardDef: any) => {
         switch (rewardDef.reward) {
             case 'gems': return `Level ${rewardDef.level} ` + gemDefines[rewardDef.id] || `Unmapped Rune Id ${rewardDef.id}`;
             case 'chest': return chestDefines[rewardDef.chest_type_id] || `Unmapped Chest Id ${rewardDef.chest_type_id}`;
             case 'sunset_tickets': return 'Sunset Ticket';
             case 'red_rubies': return 'Red Rubies';
+            case 'challenge_tokens': return 'Challenge Tokens';
+            case 'dungeon_coins': return 'Dungeon Coins';
+            case 'dungeon_vouchers': return 'Dungeon Vouchers';
+            case 'epic_recipe_tokens': return 'Epic Recipe Tokens';
             case 'crafting_materials': return craftingMaterialDefines[rewardDef.crafting_material_id] || `Unmapped Crafting Material Id ${rewardDef.crafting_material_id}`;
             default: return JSON.stringify(rewardDef);
         }
@@ -218,11 +239,15 @@ function DungeonSeasonClaim() {
                         });
                         break;
                     }
-                    case 'sunset_tickets': {
+                    case 'sunset_tickets':
+                    case 'challenge_tokens':
+                    case 'dungeon_coins':
+                    case 'dungeon_vouchers':
+                    case 'epic_recipe_tokens':
                         const qty = claimRespData.rewards[rewardKey];
-                        claimResLines.push(`${qty} x Sunset Ticket${qty > 0 ? 's' : ''}`);
+                        const name = describeType({ reward: rewardKey });
+                        claimResLines.push(`${qty} x ${name}${qty > 0 ? 's' : ''}`);
                         break;
-                    }
                     case 'chests': {
                         Object.keys(claimRespData.rewards[rewardKey]).forEach(id => {
                             const qty = claimRespData.rewards[rewardKey][id];
