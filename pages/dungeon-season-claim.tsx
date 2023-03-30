@@ -273,6 +273,7 @@ function DungeonSeasonClaim() {
                     case 'chest_changes':
                     case 'red_rubies_before':
                     case 'total_red_rubies':
+                    case 'graphic_id':
                         break;
                     default: claimResLines.push(`Unknown Reward: ${rewardKey} => ${JSON.stringify(claimRespData.rewards[rewardKey])}`);
                 }
