@@ -66,7 +66,7 @@ function DungeonSeasonClaim() {
         return rewardStrings.join(', ');
     };
 
-    const describeEffect = (effectString : string) => {
+    const describeEffect = (effectString: string) => {
         const parts = effectString.split(',');
         switch (parts[0]) {
             case 'bonus_idols_earned_from_reset':
@@ -97,10 +97,12 @@ function DungeonSeasonClaim() {
     }
 
     const checkUnclaimed = async () => {
+        // Clear existing state
+        setError(null);
         setData(null);
-        setLoading('Fetching userdata');
 
         try {
+            setLoading('Fetching userdata');
             const response = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
                 method: 'GET',
             });
@@ -196,12 +198,12 @@ function DungeonSeasonClaim() {
     };
 
     const claimAll = async () => {
+        // Clear existing state
+        setError(null);
+        setData(null);
+        
         try {
-            setLoading('Fetching current instance_id to');
-
-            // Clear unclaimed data
-            setData(null);
-
+            setLoading('Fetching current instance_id');
             // Get current instance_id
             const response = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
                 method: 'GET',
