@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import GridLoader from 'react-spinners/GridLoader';
+import pluralize from 'pluralize';
 
 function DungeonSeasonClaim() {
     const [data, setData] = useState<any>(null);
@@ -46,7 +47,7 @@ function DungeonSeasonClaim() {
             switch (rewardDef.reward) {
                 case 'gems':
                 case 'chest':
-                    rewardStrings.push(`${rewardDef.count} x ${describeType(rewardDef)}${rewardDef.count > 0 ? 's' : ''}`);
+                    rewardStrings.push(`${rewardDef.count} x ${pluralize(describeType(rewardDef), rewardDef.count)}`);
                     break;
                 case 'sunset_tickets':
                 case 'red_rubies':
@@ -55,7 +56,7 @@ function DungeonSeasonClaim() {
                 case 'dungeon_coins':
                 case 'dungeon_vouchers':
                 case 'epic_recipe_tokens':
-                    rewardStrings.push(`${rewardDef.amount} x ${describeType(rewardDef)}${rewardDef.amount > 0 ? 's' : ''}`);
+                    rewardStrings.push(`${rewardDef.amount} x ${pluralize(describeType(rewardDef), rewardDef.amount)}`);
                     break;
                 case 'season_buff':
                     rewardStrings.push(describeType(rewardDef));
@@ -85,7 +86,7 @@ function DungeonSeasonClaim() {
             case 'gems': return `Level ${rewardDef.level} ` + gemDefines[rewardDef.id] || `Unmapped Rune Id ${rewardDef.id}`;
             case 'chest': return chestDefines[rewardDef.chest_type_id] || `Unmapped Chest Id ${rewardDef.chest_type_id}`;
             case 'sunset_tickets': return 'Sunset Ticket';
-            case 'red_rubies': return 'Red Rubie';
+            case 'red_rubies': return 'Red Ruby';
             case 'challenge_tokens': return 'Challenge Token';
             case 'dungeon_coins': return 'Dungeon Coin';
             case 'dungeon_vouchers': return 'Dungeon Voucher';
@@ -201,7 +202,7 @@ function DungeonSeasonClaim() {
         // Clear existing state
         setError(null);
         setData(null);
-        
+
         try {
             setLoading('Fetching current instance_id');
             // Get current instance_id
@@ -234,7 +235,7 @@ function DungeonSeasonClaim() {
                         }
                         Object.keys(gemCounts).forEach(name => {
                             const qty = gemCounts[name];
-                            claimResLines.push(`${qty} x ${name}${qty > 0 ? 's' : ''}`);
+                            claimResLines.push(`${qty} x ${pluralize(name, qty)}`);
                         })
                         break;
                     }
@@ -242,7 +243,7 @@ function DungeonSeasonClaim() {
                         Object.keys(claimRespData.rewards[rewardKey]).forEach(id => {
                             const qty = claimRespData.rewards[rewardKey][id];
                             const name = craftingMaterialDefines[id] || `Unmapped Crafting Material Id ${id}`;
-                            claimResLines.push(`${qty} x ${name}${qty > 0 ? 's' : ''}`);
+                            claimResLines.push(`${qty} x ${pluralize(name, qty)}`);
                         });
                         break;
                     }
@@ -253,7 +254,7 @@ function DungeonSeasonClaim() {
                     case 'epic_recipe_tokens':
                         const qty = claimRespData.rewards[rewardKey];
                         const name = describeType({ reward: rewardKey });
-                        claimResLines.push(`${qty} x ${name}${qty > 0 ? 's' : ''}`);
+                        claimResLines.push(`${qty} x ${pluralize(name, qty)}`);
                         break;
                     case 'chests': {
                         Object.keys(claimRespData.rewards[rewardKey]).forEach(id => {
@@ -261,7 +262,7 @@ function DungeonSeasonClaim() {
                             const before = claimRespData.rewards['chest_changes'][id].before;
                             const after = claimRespData.rewards['chest_changes'][id].after;
                             const name = chestDefines[id] || `Unmapped Chest Id ${id}`;
-                            claimResLines.push(`${qty} x ${name}${qty > 0 ? 's' : ''} - Before: ${before}; After: ${after}`);
+                            claimResLines.push(`${qty} x ${pluralize(name, qty)} - Before: ${before}; After: ${after}`);
                         });
                         break;
                     }
@@ -269,7 +270,7 @@ function DungeonSeasonClaim() {
                         const qty = claimRespData.rewards[rewardKey];
                         const before = claimRespData.rewards['red_rubies_before'];
                         const after = claimRespData.rewards['total_red_rubies'];
-                        claimResLines.push(`${qty} x Red Rubies - Before: ${before}; After: ${after}`);
+                        claimResLines.push(`${qty} x ${pluralize('Red Ruby', qty)} - Before: ${before}; After: ${after}`);
                         break;
                     }
                     case 'chest_changes':
@@ -357,7 +358,7 @@ function DungeonSeasonClaim() {
                                 {Object.keys(data.by_reward).sort().map(name => {
                                     return (
                                         <tr key={name}>
-                                            <td className='border border-slate-300 px-2'>{name}</td>
+                                            <td className='border border-slate-300 px-2'>{pluralize(name, data.by_reward[name])}</td>
                                             <td className='border border-slate-300 px-2'>{data.by_reward[name]}</td>
                                         </tr>
                                     )
