@@ -24,6 +24,11 @@ export const defaultNavItems: NavItem[] = [
     icon: <CalendarIcon className="w-6 h-6" />,
   },
   {
+    label: "Challenges",
+    href: "/challenges",
+    icon: <CalendarIcon className="w-6 h-6" />,
+  },
+  {
     label: "User Settings",
     href: "/user-settings",
     icon: <Cog8ToothIcon className="w-6 h-6" />,
