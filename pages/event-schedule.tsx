@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime, DateTimeFormatOptions } from 'luxon';
 
 function EventSchedule() {
 
@@ -22,7 +22,7 @@ function EventSchedule() {
         { name: 'Sasha\'s Schoolhouse Scourge', month: 9, day: 22 },
     ];
 
-    const DATEFORMAT = {
+    const DATEFORMAT: DateTimeFormatOptions = {
         year: 'numeric',
         month: 'short',
         day: 'numeric',

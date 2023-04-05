@@ -1,9 +1,9 @@
-import { DateTime } from 'luxon';
+import { DateTime, DateTimeFormatOptions } from 'luxon';
 import challengeData from '../data/challenges.json';
 
 function Challenges() {
 
-    const DATEFORMAT = {
+    const DATEFORMAT: DateTimeFormatOptions = {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
