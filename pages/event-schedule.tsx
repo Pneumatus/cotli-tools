@@ -22,6 +22,16 @@ function EventSchedule() {
         { name: 'Sasha\'s Schoolhouse Scourge', month: 9, day: 22 },
     ];
 
+    const DATEFORMAT = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        weekday: 'short',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZoneName: 'short',
+    };
+
     const getNextStart = (day: number, month: number) => {
         const canadaNow = DateTime.local({ zone: 'Canada/Pacific' });
         let canadaNext = DateTime.local(canadaNow.year, month, day, 12, { zone: 'Canada/Pacific' });
@@ -59,7 +69,7 @@ function EventSchedule() {
                         return (
                             <tr key={index}>
                                 <td className='border border-slate-300 px-2'>{event.name}</td>
-                                <td className='border border-slate-300 px-2'>{event.nextStart.setZone(tz).toLocaleString(DateTime.DATETIME_MED)}</td>
+                                <td className='border border-slate-300 px-2'>{event.nextStart.setZone(tz).toLocaleString(DATEFORMAT)}</td>
                             </tr>
                         )
                     })}
