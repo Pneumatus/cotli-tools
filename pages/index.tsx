@@ -11,7 +11,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-           Here are some CoTLI tools...
+           Here are some CotLI tools...
           </p>
         </div>
       </main>

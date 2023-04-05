@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  CalendarIcon,
   Cog8ToothIcon,
   DocumentIcon,
   HomeIcon,
@@ -16,6 +17,11 @@ export const defaultNavItems: NavItem[] = [
     label: "Dungeon Season Claim",
     href: "/dungeon-season-claim",
     icon: <DocumentIcon className="w-6 h-6" />,
+  },
+  {
+    label: "Event Schedule",
+    href: "/event-schedule",
+    icon: <CalendarIcon className="w-6 h-6" />,
   },
   {
     label: "User Settings",
