@@ -23,12 +23,12 @@ function Challenges() {
     const otherChallenges = sortedChallenges.slice(3);
 
     return (
-        <div className='px-8 pt-6 pb-8 mb-4 grid grid-cols-2 gap-4 h-0'>
-            <div className='col-span-full'>
+        <div className='flex flex-wrap px-8 pt-6 pb-8 mb-4 h-0'>
+            <div className='w-full pb-4'>
                 <p className='text-xl'>Upcoming Challenges</p>
                 <p>- Dates and times shown in your local timezone</p>
             </div>
-            <div>
+            <div className='w-full lg:w-1/2 pb-4'>
                 <p>Next Challenge Candidates</p>
                 <table className='table-auto border-separate border border-slate-400'>
                     <thead>
@@ -49,7 +49,7 @@ function Challenges() {
                     </tbody>
                 </table>
             </div>
-            <div>
+            <div className='w-full lg:w-1/2'>
                 <p>Other Challenges</p>
                 <table className='table-auto border-separate border border-slate-400'>
                     <thead>
