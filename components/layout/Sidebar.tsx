@@ -37,7 +37,7 @@ const Sidebar = ({ open, navItems = defaultNavItems, setOpen }: Props) => {
         <ul className="py-2 flex flex-col gap-2">
           {navItems.map((item, index) => {
             return (
-              <Link key={index} href={item.href}>
+              <Link key={index} href={item.href} onClick={() => setOpen(false)}>
                 <li
                   className={classNames({
                     "text-indigo-100 hover:bg-indigo-900": true, //colors

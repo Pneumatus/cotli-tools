@@ -319,8 +319,8 @@ function DungeonSeasonClaim() {
             )}
 
             {data && data.by_level && Object.keys(data.by_level).length > 0 && (
-                <div className='grid grid-cols-2 gap-4'>
-                    <div>
+                <div className='flex flex-wrap'>
+                    <div className='w-full lg:w-1/2 pb-4'>
                         <p className='text-xl'>Unclaimed By Level</p>
                         <table className='table-auto border-separate border border-slate-400'>
                             <thead>
@@ -345,9 +345,9 @@ function DungeonSeasonClaim() {
                             </tbody>
                         </table>
                     </div>
-                    <div>
+                    <div className='w-full lg:w-1/2 pb-4'>
                         <p className='text-xl'>Unclaimed By Reward</p>
-                        <table className='table-auto border-separate border border-slate-400 w-1/2'>
+                        <table className='table-auto border-separate border border-slate-400 w-full lg:w-1/2'>
                             <thead>
                                 <tr>
                                     <th className='border border-slate-300 px-2'>Reward</th>
@@ -366,7 +366,7 @@ function DungeonSeasonClaim() {
                             </tbody>
                         </table>
                         <div className='pt-5'></div>
-                        <div className='bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 w-1/2' role='alert'>
+                        <div className='bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 w-full lg:w-1/2' role='alert'>
                             <p className='font-bold'>Be Warned</p>
                             <p>This should work fine, but don&apos;t blame me if it doesn&apos;t! You may want to close your game before claiming just to be safe.</p>
                         </div>

@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel='shortcut icon' href='/cotli-tools/favicon.ico' />
       </Head>
       <Layout>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </Layout>
     </>
   );
