@@ -62,7 +62,7 @@ function TalentReset() {
                 <div>
                     <div className='bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 w-full lg:w-1/2' role='alert'>
                         <p className='font-bold'>Be Warned</p>
-                        <p>This will reset your talents in game<br />If you don't have free talent respecs it will reduce your idol count!</p>
+                        <p>This will reset your talents in game<br />If you don&apos;t have free talent respecs it will reduce your idol count!</p>
                     </div>
                     <div className='pt-5'>
                         <button onClick={resetTalents} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Reset Talents</button>
