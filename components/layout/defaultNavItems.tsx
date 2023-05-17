@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ArrowPathIcon,
   CalendarIcon,
   Cog8ToothIcon,
   DocumentIcon,
@@ -27,6 +28,11 @@ export const defaultNavItems: NavItem[] = [
     label: "Challenges",
     href: "/challenges",
     icon: <CalendarIcon className="w-6 h-6" />,
+  },
+  {
+    label: "Talent Reset",
+    href: "/talent-reset",
+    icon: <ArrowPathIcon className="w-6 h-6" />,
   },
   {
     label: "User Settings",
