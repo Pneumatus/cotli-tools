@@ -13,6 +13,8 @@ function DungeonSeasonClaim() {
     const [userId, setUserId] = useState<string>('');
     const [hash, setHash] = useState<string>('');
 
+    const [instanceId, setInstanceId] = useState<any>(null);
+
     useEffect(() => {
         const savedUserId = localStorage.getItem('userId');
         const savedHash = localStorage.getItem('hash');
@@ -109,6 +111,7 @@ function DungeonSeasonClaim() {
             });
 
             const data = await response.json();
+            setInstanceId(data.details.instance_id);
 
             setLoading('Checking for unclaimed rewards');
 
@@ -198,23 +201,15 @@ function DungeonSeasonClaim() {
         }
     };
 
-    const claimAll = async () => {
+    const claim = async(level:String, bonus:Number) => {
         // Clear existing state
         setError(null);
         setData(null);
 
         try {
-            setLoading('Fetching current instance_id');
-            // Get current instance_id
-            const response = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=getUserDetails&user_id=${userId}&hash=${hash}&instance_key=0`, {
-                method: 'GET',
-            });
-            const data = await response.json();
-            const instanceId = data.details.instance_id;
-
             setLoading('Claiming rewards');
 
-            const claimResp = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=claimseasonreward&user_id=${userId}&hash=${hash}&instance_id=${instanceId}&season_id=7&level=all&is_bonus=0`, {
+            const claimResp = await fetch(`https://idlemaster.djartsgames.ca/~idle/post.php?call=claimseasonreward&user_id=${userId}&hash=${hash}&instance_id=${instanceId}&season_id=7&level=${level}&is_bonus=${bonus}`, {
                 method: 'GET',
             });
 
@@ -337,8 +332,8 @@ function DungeonSeasonClaim() {
                                     return (
                                         <tr key={level}>
                                             <td className='border border-slate-300 px-2'>{level}</td>
-                                            <td className='border border-slate-300 px-2'>{data.by_level[level].base_rewards}</td>
-                                            {data.has_pass && <td className='border border-slate-300 px-2'>{data.by_level[level].bonus_rewards}</td>}
+                                            <td className='border border-slate-300 px-2'>{data.by_level[level].base_rewards || 'Already Claimed'}{data.by_level[level].base_rewards && <button onClick={() => claim(level, 0)} className='float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-0.5 px-0.5 rounded focus:outline-none focus:shadow-outline'>Claim</button>}</td>
+                                            {data.has_pass && <td className='border border-slate-300 px-2'>{data.by_level[level].bonus_rewards || 'Already Claimed'}{data.by_level[level].bonus_rewards && <button onClick={() => claim(level, 1)} className='float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-0.5 px-0.5 rounded focus:outline-none focus:shadow-outline'>Claim</button>}</td>}
                                         </tr>
                                     )
                                 })}
@@ -371,7 +366,7 @@ function DungeonSeasonClaim() {
                             <p>This should work fine, but don&apos;t blame me if it doesn&apos;t! You may want to close your game before claiming just to be safe.</p>
                         </div>
                         <div className='pt-5'>
-                            <button onClick={claimAll} className='w-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Claim All</button>
+                            <button onClick={() => claim('all', 0)} className='w-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Claim All</button>
                         </div>
                     </div>
                 </div>
